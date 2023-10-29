@@ -6,7 +6,7 @@
 void BinarySearchValueFinder(std::vector<int> numbers)
 {
     int value;
-    std::cout << "\nEnter the value to find ";
+    std::cout << "\n\nEnter the value to find ";
     std::cin >> value;
     std::cout << "\n";
 
@@ -67,11 +67,11 @@ int main()
                 }
                 else if (item == 'N')
                 {
-                    std::cout << "Enter the size of array (array will be 1..size) ";
+                    std::cout << "Enter the size of array (array will be 1 .. size) ";
                     std::cin >> size;
-                    std::vector<int> numbers(size);
+                    std::vector<int> numbers(size + 1);
 
-                    std::cout << "Array: ";
+                    std::cout << "\nArray: ";
 
                     for (int i = 1; i <= size; i++)
                     {
@@ -85,8 +85,6 @@ int main()
                     system("cls");
                     break;
                 }
-
-
             }
 
             default:
