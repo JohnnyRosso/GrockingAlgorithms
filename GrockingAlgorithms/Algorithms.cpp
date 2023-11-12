@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <ctime>
 #include "BinarySearch.h"
 #include "SelectionSort.h"
 #include "Partition.h"
@@ -30,12 +31,15 @@ void ManualEntering(int size, std::vector<int> &numbers)
 
 void ArrayOutput(std::vector<int> numbers)
 {
-    for (auto element : numbers)
-        std::cout << element;
+    for (auto& element : numbers)
+        std::cout << element << " ";
+    std::cout << "\n\n";
 }
 
 int main()
 {
+    srand(time(NULL));
+
     while (true)
     {
         std::cout << "Algorithms\n\n";
@@ -117,12 +121,40 @@ int main()
                     std::vector<int> numbers(size);
 
                     ManualEntering(size, numbers);
-                    std::vector<int> selectionSortResult = SelectionSort(numbers);
+                    SelectionSort(numbers);
                     
                     std::cout << "Sorted array: ";
-                    ArrayOutput(selectionSortResult);
-                }
+                    ArrayOutput(numbers);
 
+                    system("pause");
+                    system("cls");
+                    break;
+                }
+                else if (item == 'N')
+                {
+                    std::cout << "Enter the size of array ";
+                    std::cin >> size;
+                    std::vector<int> numbers(size);
+                    std::cout << "\nThere are will be " << size << " random numbers\n";
+                    std::cout << "Enter the range of random numbers (left and right borders) ";
+                    int left, right;
+                    std::cin >> left >> right;
+                    std::cout << "\nYour random elements in range from " << left << " to " << right << "\n";
+
+                    for (auto& element : numbers)
+                    {
+                        element = std::rand() % (right - left) + left;
+                        std::cout << element << " ";
+                    }
+
+                    SelectionSort(numbers);
+                    std::cout << "\n\nSorted array: \n";
+                    ArrayOutput(numbers);
+
+                    system("pause");
+                    system("cls");
+                    break;
+                }
 
             }
             default:
