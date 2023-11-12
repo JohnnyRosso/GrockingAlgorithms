@@ -2,6 +2,9 @@
 #include <vector>
 #include <algorithm>
 #include "BinarySearch.h"
+#include "SelectionSort.h"
+#include "Partition.h"
+#include "QuickSort.h"
 
 void BinarySearchValueFinder(std::vector<int> numbers)
 {
@@ -17,13 +20,28 @@ void BinarySearchValueFinder(std::vector<int> numbers)
     std::cout << "\n\n";
 }
 
+void ManualEntering(int size, std::vector<int> &numbers)
+{
+    std::cout << "Enter the array ";
+
+    for (int i = 0; i < size; i++)
+        std::cin >> numbers[i];
+}
+
+void ArrayOutput(std::vector<int> numbers)
+{
+    for (auto element : numbers)
+        std::cout << element;
+}
+
 int main()
 {
     while (true)
     {
         std::cout << "Algorithms\n\n";
-        std::cout << "1.BinarySearch\n";
-        std::cout << "2.Exit\n";
+        std::cout << "1.Binary Search\n";
+        std::cout << "2.Selection Sort\n";
+        std::cout << "3.Exit\n";
         std::cout << "\n";
         std::cout << "Choose an option ";
 
@@ -36,7 +54,7 @@ int main()
             case 1: //BinarySearch
             {
                 system("cls");
-                std::cout << "BinarySearch\n\n";
+                std::cout << "Binary Search\n\n";
                 std::cout << "Manual entering the array Y/N? ";
 
                 int size;
@@ -49,15 +67,11 @@ int main()
                     std::cin >> size;
                     std::vector<int> numbers(size);
 
-                    std::cout << "Enter the array ";
-
-                    for (int i = 0; i < size; i++)
-                        std::cin >> numbers[i];
+                    ManualEntering(size, numbers);
 
                     std::sort(numbers.begin(), numbers.end());
                     std::cout << "Sorted array: ";
-                    for (int i = 0; i < size; i++)
-                        std::cout << numbers[i] << " ";
+                    ArrayOutput(numbers);
 
                     BinarySearchValueFinder(numbers);
                     
@@ -85,6 +99,31 @@ int main()
                     system("cls");
                     break;
                 }
+            }
+            case 2: //SelectionSort
+            {
+                system("cls");
+                std::cout << "Selection Sort\n\n";
+                std::cout << "Manual entering the array Y/N? ";
+
+                int size;
+                char item;
+                std::cin >> item;
+
+                if (item == 'Y')
+                {
+                    std::cout << "Enter the size of array ";
+                    std::cin >> size;
+                    std::vector<int> numbers(size);
+
+                    ManualEntering(size, numbers);
+                    std::vector<int> selectionSortResult = SelectionSort(numbers);
+                    
+                    std::cout << "Sorted array: ";
+                    ArrayOutput(selectionSortResult);
+                }
+
+
             }
             default:
                 return 0;
