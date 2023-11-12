@@ -45,7 +45,9 @@ int main()
         std::cout << "Algorithms\n\n";
         std::cout << "1.Binary Search\n";
         std::cout << "2.Selection Sort\n";
-        std::cout << "3.Exit\n";
+        std::cout << "3.Partition\n";
+        std::cout << "4.QuickSort\n";
+        std::cout << "5.Exit\n";
         std::cout << "\n";
         std::cout << "Choose an option ";
 
@@ -58,14 +60,14 @@ int main()
             case 1: //BinarySearch
             {
                 system("cls");
-                std::cout << "Binary Search\n\n";
+                std::cout << "Binary Search - O(log(n))\n\n";
                 std::cout << "Manual entering the array Y/N? ";
 
                 int size;
                 char item;
                 std::cin >> item;
 
-                if (item == 'Y')
+                if (item == 'Y' || item == 'y')
                 {
                     std::cout << "Enter the size of array ";
                     std::cin >> size;
@@ -83,7 +85,7 @@ int main()
                     system("cls");
                     break;
                 }
-                else if (item == 'N')
+                else if (item == 'N' || item == 'n')
                 {
                     std::cout << "Enter the size of array (array will be 1 .. size) ";
                     std::cin >> size;
@@ -107,14 +109,14 @@ int main()
             case 2: //SelectionSort
             {
                 system("cls");
-                std::cout << "Selection Sort\n\n";
+                std::cout << "Selection Sort - O(n^2)\n\n";
                 std::cout << "Manual entering the array Y/N? ";
 
                 int size;
                 char item;
                 std::cin >> item;
 
-                if (item == 'Y')
+                if (item == 'Y' || item == 'y')
                 {
                     std::cout << "Enter the size of array ";
                     std::cin >> size;
@@ -130,7 +132,7 @@ int main()
                     system("cls");
                     break;
                 }
-                else if (item == 'N')
+                else if (item == 'N' || item == 'n')
                 {
                     std::cout << "Enter the size of array ";
                     std::cin >> size;
@@ -155,6 +157,14 @@ int main()
                     system("cls");
                     break;
                 }
+
+            }
+            case 3: //Partition
+            {
+
+            }
+            case 4: //QuickSort
+            {
 
             }
             default:
