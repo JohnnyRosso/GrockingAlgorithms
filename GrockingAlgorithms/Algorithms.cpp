@@ -6,6 +6,40 @@
 #include "SelectionSort.h"
 #include "Partition.h"
 #include "QuickSort.h"
+#include "Merge.h"
+#include "MergeSort.h"
+
+void AlgorithmStart(std::vector<int>& numbers, int& size, char& item)
+{
+    std::cout << "Enter the size of array ";
+    std::cin >> size;
+    numbers.assign(size, 0);
+    std::cout << "Manual entering the array Y/N? ";
+
+    std::cin >> item;
+}
+
+void AlgorithmEnd()
+{
+    system("pause");
+    system("cls");
+}
+
+void RandomNumbers(std::vector<int>& numbers, int size)
+{
+    std::cout << "\nThere are will be " << size << " random numbers\n";
+    std::cout << "Enter the range of random numbers (left and right borders) ";
+    int left, right;
+    std::cin >> left >> right;
+    std::cout << "\nYour random elements in range from " << left << " to " << right << "\n";
+
+    for (auto& element : numbers)
+    {
+        element = std::rand() % (right - left) + left;
+        std::cout << element << " ";
+    }
+    std::cout << "\nIn progress...\n";
+}
 
 void BinarySearchValueFinder(std::vector<int> numbers)
 {
@@ -21,12 +55,12 @@ void BinarySearchValueFinder(std::vector<int> numbers)
     std::cout << "\n\n";
 }
 
-void ManualEntering(int size, std::vector<int> &numbers)
+void ManualEntering(std::vector<int> &numbers)
 {
     std::cout << "Enter the array ";
 
-    for (int i = 0; i < size; i++)
-        std::cin >> numbers[i];
+    for (auto& element : numbers)
+        std::cin >> element;
 }
 
 void ArrayOutput(std::vector<int> numbers)
@@ -47,11 +81,15 @@ int main()
         std::cout << "2.Selection Sort\n";
         std::cout << "3.Partition\n";
         std::cout << "4.QuickSort\n";
-        std::cout << "5.Exit\n";
+        std::cout << "5.MergeSort\n";
+        std::cout << "6.Exit\n";
         std::cout << "\n";
         std::cout << "Choose an option ";
 
         int algorithmNumber;
+        int size;
+        char item;
+        std::vector<int> numbers;
 
         std::cin >> algorithmNumber;
 
@@ -61,19 +99,12 @@ int main()
             {
                 system("cls");
                 std::cout << "Binary Search - O(log(n))\n\n";
-                std::cout << "Manual entering the array Y/N? ";
 
-                int size;
-                char item;
-                std::cin >> item;
+                AlgorithmStart(numbers, size, item);
 
                 if (item == 'Y' || item == 'y')
                 {
-                    std::cout << "Enter the size of array ";
-                    std::cin >> size;
-                    std::vector<int> numbers(size);
-
-                    ManualEntering(size, numbers);
+                    ManualEntering(numbers);
 
                     std::sort(numbers.begin(), numbers.end());
                     std::cout << "Sorted array: ";
@@ -81,19 +112,14 @@ int main()
 
                     BinarySearchValueFinder(numbers);
                     
-                    system("pause");
-                    system("cls");
+                    AlgorithmEnd();
                     break;
                 }
                 else if (item == 'N' || item == 'n')
                 {
-                    std::cout << "Enter the size of array (array will be 1 .. size) ";
-                    std::cin >> size;
-                    std::vector<int> numbers(size + 1);
-
                     std::cout << "\nArray: ";
 
-                    for (int i = 1; i <= size; i++)
+                    for (int i = 0; i < size; i++)
                     {
                         numbers[i] = i;
                         std::cout << i << " ";
@@ -101,8 +127,7 @@ int main()
 
                     BinarySearchValueFinder(numbers);
 
-                    system("pause");
-                    system("cls");
+                    AlgorithmEnd();
                     break;
                 }
             }
@@ -110,61 +135,137 @@ int main()
             {
                 system("cls");
                 std::cout << "Selection Sort - O(n^2)\n\n";
-                std::cout << "Manual entering the array Y/N? ";
 
-                int size;
-                char item;
-                std::cin >> item;
+                AlgorithmStart(numbers, size, item);
 
                 if (item == 'Y' || item == 'y')
                 {
-                    std::cout << "Enter the size of array ";
-                    std::cin >> size;
-                    std::vector<int> numbers(size);
+                    ManualEntering(numbers);
 
-                    ManualEntering(size, numbers);
                     SelectionSort(numbers);
-                    
                     std::cout << "Sorted array: ";
                     ArrayOutput(numbers);
 
-                    system("pause");
-                    system("cls");
+                    AlgorithmEnd();
                     break;
                 }
                 else if (item == 'N' || item == 'n')
                 {
-                    std::cout << "Enter the size of array ";
-                    std::cin >> size;
-                    std::vector<int> numbers(size);
-                    std::cout << "\nThere are will be " << size << " random numbers\n";
-                    std::cout << "Enter the range of random numbers (left and right borders) ";
-                    int left, right;
-                    std::cin >> left >> right;
-                    std::cout << "\nYour random elements in range from " << left << " to " << right << "\n";
-
-                    for (auto& element : numbers)
-                    {
-                        element = std::rand() % (right - left) + left;
-                        std::cout << element << " ";
-                    }
+                    RandomNumbers(numbers, size);
 
                     SelectionSort(numbers);
                     std::cout << "\n\nSorted array: \n";
                     ArrayOutput(numbers);
 
-                    system("pause");
-                    system("cls");
+                    AlgorithmEnd();
                     break;
                 }
 
             }
             case 3: //Partition
             {
+                system("cls");
+                std::cout << "Partition\n\n";
 
+                AlgorithmStart(numbers, size, item);
+
+                if (item == 'Y' || item == 'y')
+                {
+                    ManualEntering(numbers);
+
+                    std::cout << "\nEnter the partition element ";
+                    int pivot;
+                    std::cin >> pivot;
+                    std::cout << "\n";
+
+                    Partition(numbers, 0, size, pivot);
+
+                    std::cout << "Partition element: " << pivot << "\n";
+                    std::cout << "Partition result: ";
+                    ArrayOutput(numbers);
+
+                    AlgorithmEnd();
+                    break;
+                }
+                else if (item == 'N' || item == 'n')
+                {
+                    RandomNumbers(numbers, size);
+
+                    std::cout << "\nEnter the partition element ";
+                    int pivot;
+                    std::cin >> pivot;
+                    std::cout << "\n";
+
+                    Partition(numbers, 0, size, pivot);
+
+                    std::cout << "Partition element: " << pivot << "\n";
+                    std::cout << "Partition result: ";
+                    ArrayOutput(numbers);
+
+                    AlgorithmEnd();
+                    break;
+                }
             }
             case 4: //QuickSort
             {
+                system("cls");
+                std::cout << "QuickSort\n\n";
+
+                AlgorithmStart(numbers, size, item);
+
+                if (item == 'Y' || item == 'y')
+                {
+                    ManualEntering(numbers);
+
+                    QuickSort(numbers, 0, size);
+                    std::cout << "\nSorted array: ";
+                    ArrayOutput(numbers);
+
+                    AlgorithmEnd();
+                    break;
+                }
+                else if (item == 'N' || item == 'n')
+                {
+                    RandomNumbers(numbers, size);
+
+                    QuickSort(numbers, 0, size);
+                    std::cout << "\n\nSorted array: ";
+                    ArrayOutput(numbers);
+
+                    AlgorithmEnd();
+                    break;
+                }
+
+            }
+            case 5: //MergeSort
+            {
+                system("cls");
+                std::cout << "MergeSort\n\n";
+
+                AlgorithmStart(numbers, size, item);
+
+                if (item == 'Y' || item == 'y')
+                {
+                    ManualEntering(numbers);
+
+                    MergeSort(numbers);
+                    std::cout << "\nSorted array: ";
+                    ArrayOutput(numbers);
+
+                    AlgorithmEnd();
+                    break;
+                }
+                else if (item == 'N' || item == 'n')
+                {
+                    RandomNumbers(numbers, size);
+
+                    MergeSort(numbers);
+                    std::cout << "\n\nSorted array: ";
+                    ArrayOutput(numbers);
+
+                    AlgorithmEnd();
+                    break;
+                }
 
             }
             default:

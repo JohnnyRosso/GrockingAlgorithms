@@ -6,10 +6,11 @@ void QuickSort(std::vector<int>& numbers, int left, int right)
 {
     if (left < right)
     {
-        int pivot = numbers[(left + right) / 2];
-        int partitionIndex = Partition(numbers, left, right, pivot);
+        srand(time(NULL));
+        int pivot = numbers[std::rand() % (right - left) + left];
+        std::vector<int> partitionIndex = Partition(numbers, left, right, pivot);
 
-        QuickSort(numbers, left, partitionIndex - 1);
-        QuickSort(numbers, partitionIndex + 1, right);
+        QuickSort(numbers, left, partitionIndex[0]);
+        QuickSort(numbers, partitionIndex[1], right);
     }
 }

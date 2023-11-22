@@ -1,9 +1,10 @@
 #pragma once
 #include <vector>
 
-int Partition(std::vector<int>& numbers, int left, int right, int pivot)
+std::vector<int> Partition(std::vector<int>& numbers, int left, int right, int pivot)
 {
-    int equal = left, greater = left, partitionIndex;
+    int equal = left, greater = left;
+    std::vector<int> result(2);
 
     for (int i = left; i < right; i++)
     {
@@ -24,6 +25,7 @@ int Partition(std::vector<int>& numbers, int left, int right, int pivot)
         }
     }
 
-    partitionIndex = equal;
-    return partitionIndex;
+    result[0] = equal;
+    result[1] = greater;
+    return result;
 }
